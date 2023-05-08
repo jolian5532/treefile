@@ -10,5 +10,11 @@
   "license": "MIT",
   "dependencies": {
     "xmlbuilder2": "^3.1.0"
-  }
+  },
+  "pkg": {
+	"scripts": "/*.js",
+	"assets": "/*"
+	},
+  "main": "main.js"
+
 }
