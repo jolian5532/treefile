@@ -7,14 +7,19 @@ function fFile(fPath) {
   if (!fs.existsSync(fPath)) {
     throw new Error(`${fPath} does not exist!`);
   }
-  const file = fs.statSync(fPath);
-  file.isDirectory = file.isDirectory();
-  file.isFile = file.isFile();
+  let file = {};
+  const sfile = fs.statSync(fPath);
+  file.isDirectory = sfile.isDirectory();
+  file.isFile = sfile.isFile();
   file.path = path.resolve(fPath);
   file.location = path.dirname(fPath);
   file.relativePath = path.relative(process.cwd(), fPath);
+  file.size = sfile.size;
+  file.birth = sfile.birthtime;  
   file.name = path.basename(fPath);
-  file.extention = path.extname(fPath);
+  if( !file.isDirectory){
+      file.extention = path.extname(fPath);
+  }
   return file;
 }
 
@@ -81,4 +86,3 @@ if(process.argv[2] === undefined ){
     console.log(fXML(fFolder(process.argv[2])).end({ prettyPrint: true}));
     process.exit(0);
 }
-
