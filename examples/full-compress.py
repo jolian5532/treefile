@@ -12,11 +12,11 @@ root = dom.documentElement
 exts = dom.getElementsByTagName("extention")
 
 imgs = [".png",".jpg",".jpeg",".gif",".svg"]
-to_webp = [".png",".svg"]
+to_webp = [".png"]
 
 def replace_extension(match):
     attr_value = match.group(1)
-    return attr_value.replace('.png', '.webp').replace('.svg', '.webp')
+    return attr_value.replace('.png', '.webp')
 
 for ext in exts:
     extension_text = ext.firstChild.data.strip()
@@ -53,7 +53,7 @@ for ext in exts:
     elif extension_text in imgs:
           path = ext.parentNode.getElementsByTagName("path")[0].firstChild.nodeValue
           if extension_text in to_webp:
-              pattern = r"\.(png|svg)\b"
+              pattern = r"\.(png)\b"
               topath = re.sub(pattern, ".webp",path)
               delpath = path
               path = f'"{path}"'
